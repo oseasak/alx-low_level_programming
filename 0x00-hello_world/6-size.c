@@ -13,8 +13,3 @@ int main(void)
 	printf("Size of a float: %d byte(s)\n", sizeof(float));
 	return (0);
 }
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-
