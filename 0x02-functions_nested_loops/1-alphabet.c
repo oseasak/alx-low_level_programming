@@ -1,9 +1,13 @@
 #include "main.h"
 
 /**
- * main - print_alphabet
+ * main - Print Alphabet
+ *
+ * Description: 'Alphabet'
+ *
  * Return: 0
  */
+
 
 void print_alphabet(void)
 {
