@@ -5,7 +5,7 @@
  *
  * Description: 'Alphabet'
  *
- * Return: 0
+ * Return: void
  */
 
 
