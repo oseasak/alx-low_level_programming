@@ -4,7 +4,7 @@
   * puts_half - prints half of a string. 
   * @str: param 
   */ 
- void puts_half(char *str) 
+ void puts_half(char *str)
  { 
          int count = 0, i; 
   
