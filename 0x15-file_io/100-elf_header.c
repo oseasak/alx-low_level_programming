@@ -5,20 +5,20 @@
  */
 /**
  * check_elf - Checks if a file is an ELF file.
- * @e_ident: A pointer to an array containing the ELF magic numbers.
+ * @e_ident: Pointer to array containing the ELF magic numbers.
  *
  * Description: If the file is not an ELF file - exit code 98.
  */
 void check_elf(unsigned char *e_ident)
 {
-	int i;
+	int f;
 
-	for (i = 0; i < 4; i++)
+	for (f = 0; f < 4; f++)
 	{
-		if (e_ident[i] != 127 &&
-		    e_ident[i] != 'E' &&
-		    e_ident[i] != 'L' &&
-		    e_ident[i] != 'F')
+		if (e_ident[f] != 127 &&
+		    e_ident[f] != 'E' &&
+		    e_ident[f] != 'L' &&
+		    e_ident[f] != 'F')
 		{
 			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
 			exit(98);
@@ -27,22 +27,22 @@ void check_elf(unsigned char *e_ident)
 }
 
 /**
- * print_magic - Prints the magic numbers of an ELF header.
+ * print_magic - Prints  magic numbers of an ELF header.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
  *
  * Description: Magic numbers are separated by spaces.
  */
 void print_magic(unsigned char *e_ident)
 {
-	int x;
+	int y;
 
 	printf("  Magic:   ");
 
-	for (x = 0; x < EI_NIDENT; x++)
+	for (y = 0; y < EI_NIDENT; y++)
 	{
-		printf("%02x", e_ident[x]);
+		printf("%02x", e_ident[y]);
 
-		if (x == EI_NIDENT - 1)
+		if (y == EI_NIDENT - 1)
 			printf("\n");
 		else
 			printf(" ");
@@ -259,10 +259,10 @@ void close_elf(int elf)
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	Elf64_Ehdr *header;
-	int fd, s;
+	int ff, s;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	ff = open(argv[1], O_RDONLY);
+	if (ff == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
@@ -270,15 +270,15 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	header = malloc(sizeof(Elf64_Ehdr));
 	if (header == NULL)
 	{
-		close_elf(fd);
+		close_elf(ff);
 		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
-	s = read(fd, header, sizeof(Elf64_Ehdr));
+	s = read(ff, header, sizeof(Elf64_Ehdr));
 	if (s == -1)
 	{
 		free(header);
-		close_elf(fd);
+		close_elf(ff);
 		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
@@ -295,6 +295,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	print_entry(header->e_entry, header->e_ident);
 
 	free(header);
-	close_elf(fd);
+	close_elf(ff);
 	return (0);
 }
